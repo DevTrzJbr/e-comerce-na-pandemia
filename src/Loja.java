@@ -33,14 +33,12 @@ public class Loja{
                 break;
 
                 case 2:
-                System.out.println("");
-                System.out.println("Listar pedido\n");
+                System.out.println("\nListar pedido\n");
                 listarPedido();
                 break;
 
                 case 3:
-                System.out.println("");
-                System.out.println("Buscar pedido\n");
+                System.out.println("\nBuscar pedido\n");
                 buscarPedido();
                 break;
 
@@ -98,47 +96,26 @@ public class Loja{
     public void buscarPedido(){}
     
     public void removerPedido(){
-        // System.out.println("Seu pedido de "+ pedido +" foi removido.");
         int fazer = 1;
         int n;
         
         do{
-            int size = listaPedidos.size();
-            System.out.println("");
-            System.out.println("Remover Pedido");
+            System.out.println("\nRemover Pedido");
             n = sc.nextInt() - 1;
             if (listaPedidos.isEmpty()){
                 System.out.println("Lista vazia!");
                 return;
-            } else if(n > size) {
+            } else if(n >= listaPedidos.size() || n < 0) {
                 System.out.println("Erro: Este pedido não está na lista.\n");
             } else {
                 Pedidos pedido = listaPedidos.get(n);
                 listaPedidos.remove(listaPedidos.indexOf(pedido));
                 listarPedido();
+                System.out.println("\nSeu pedido ["+ pedido +"] foi removido.\n");
             }
             System.out.println("----Remover outro[1] -------- Voltar[0]----");
             fazer = sc.nextInt();
         } while (fazer == 1);
-        
-        // while(n != 0){
-        //     System.out.println("");
-        //     System.out.println("Remover Pedido");
-        //     Pedidos pedido = listaPedidos.get(sc.nextInt() - 1);
-        //     if (listaPedidos.isEmpty()){
-        //         System.out.println("Lista vazia!");
-        //         return;
-        //     } else if(n > listaPedidos.size()){
-        //        System.out.println("\n\nEste pedido não existe!");
-        //        listarPedido();
-        //         n = 2;
-        //     } else {
-        //         listaPedidos.remove(listaPedidos.indexOf(pedido));
-        //         listarPedido();
-        //         System.out.println("----Remover outro[1] -------- Voltar[0]----");
-        //         fazer = sc.nextInt();
-        //     }            
-        // }
     };
     
     public void metodos(){
