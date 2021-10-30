@@ -16,6 +16,12 @@ public class Pedidos {
         this.valorTotalCalculado = 0;        
     }
 
+    public Pedidos(int id) {
+        this.pedidoNome = "nome";
+        this.pedidoID = id;
+        this.valorTotalCalculado = 0;        
+    }
+
     public String getPedidoNome() {
         return this.pedidoNome;
     }
@@ -47,7 +53,7 @@ public class Pedidos {
     public void setValorTotalCalculado(float valorTotalCalculado) {
         this.valorTotalCalculado = valorTotalCalculado;
     }
-
+    // Por definição Pedido retorna o nome.
     @Override
     public String toString(){
         return this.pedidoNome;
