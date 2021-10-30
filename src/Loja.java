@@ -38,7 +38,7 @@ public class Loja{
                 break;
 
                 case 3:
-                System.out.println("\nBuscar pedido\n");
+                System.out.println("\nBuscar pedido");
                 buscarPedido();
                 break;
 
@@ -93,7 +93,18 @@ public class Loja{
         }
     }
 
-    public void buscarPedido(){}
+    public void buscarPedido(){
+        int n = sc.nextInt() - 1;
+            if (listaPedidos.isEmpty()){
+                System.out.println("Lista vazia!");
+                return;
+            } else if(n >= listaPedidos.size() || n < 0) {
+                System.out.println("Erro: Este pedido não está na lista.\n");
+            } else {
+                // Pedidos pedido = listaPedidos.get(n);
+                System.out.println(listaPedidos.get(n));
+            }
+    }
     
     public void removerPedido(){
         int fazer = 1;
