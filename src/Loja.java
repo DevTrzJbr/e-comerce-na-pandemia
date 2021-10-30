@@ -38,10 +38,9 @@ public class Loja{
                 break;
 
                 case 3:
-                System.out.println("\nBuscar pedido");
                 buscarPedido();
                 break;
-
+                
                 case 4:
                 removerPedido();
                 break;
@@ -58,7 +57,7 @@ public class Loja{
     };
     
     public void inserirPedido(){
-         // Consertar fechamento dos scanners (Perguntar ao professor)
+        // Consertar fechamento dos scanners (Perguntar ao professor)
         int n = 1;
         
         while(n != 0){
@@ -88,13 +87,18 @@ public class Loja{
         System.out.printf("\n--------Lista de pedidos--------\n");
         int i = 1;
         for (Pedidos numlista: listaPedidos) {
-          System.out.printf("Pedido %d- %s\n", i, numlista);
-          i++;
+            System.out.printf("Pedido %d- %s\n", i, numlista);
+            i++;
         }
     }
-
+    
     public void buscarPedido(){
-        int n = sc.nextInt() - 1;
+        int fazer = 1;
+        int n;
+        
+        do{
+            System.out.println("\nBuscar pedido");
+            n = sc.nextInt() - 1;
             if (listaPedidos.isEmpty()){
                 System.out.println("Lista vazia!");
                 return;
@@ -104,6 +108,9 @@ public class Loja{
                 // Pedidos pedido = listaPedidos.get(n);
                 System.out.println(listaPedidos.get(n));
             }
+            System.out.println("----Buscar outro[1] -------- Voltar[0]----");
+            fazer = sc.nextInt();
+        } while(fazer == 1);
     }
     
     public void removerPedido(){
@@ -126,7 +133,7 @@ public class Loja{
             }
             System.out.println("----Remover outro[1] -------- Voltar[0]----");
             fazer = sc.nextInt();
-        } while (fazer == 1);
+        } while(fazer == 1);
     };
     
     public void metodos(){
