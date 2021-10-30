@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Loja{
-    
+    Scanner sc = new Scanner(System.in);
     private List <Pedidos> listaPedidos = new ArrayList<>();
     
     public Funcionario dono = new Funcionario("Vinicius", 123); // Melhorar sistema de funcionários (Perguntar ao professor)
@@ -16,13 +16,13 @@ public class Loja{
         while(rodando == true){
             System.out.println("");
             System.out.println("---------MENU----------");
-            System.out.println("Fazer pedido[1] Bucar pedido[2] Remover pedido[3] Sair[0]");
+            System.out.println("Fazer pedido[1] Listar pedido [2] Bucar pedido[3] Remover pedido[4] Sair[0]");
             System.out.println("Digite as opções:");
             int opcao = sc.nextInt();
             switch(opcao)
             {
                 case 0:
-                System.out.println("Obrigado pela preferencia. Volte sempre!");
+                System.out.println("\nObrigado pela preferencia. Volte sempre!");
                 System.out.println("Saindo...");
                 rodando = false;
                 break;
@@ -34,11 +34,17 @@ public class Loja{
 
                 case 2:
                 System.out.println("");
+                System.out.println("Listar pedido\n");
+                listarPedido();
+                break;
+
+                case 3:
+                System.out.println("");
                 System.out.println("Buscar pedido\n");
                 buscarPedido();
                 break;
 
-                case 3:
+                case 4:
                 removerPedido();
                 break;
                 
@@ -54,7 +60,7 @@ public class Loja{
     };
     
     public void inserirPedido(){
-        Scanner sc = new Scanner(System.in); // Consertar fechamento dos scanners (Perguntar ao professor)
+         // Consertar fechamento dos scanners (Perguntar ao professor)
         int n = 1;
         
         while(n != 0){
@@ -65,13 +71,13 @@ public class Loja{
             listaPedidos.add(new Pedidos(nomeProduto));
             produto.setPedidoNome(nomeProduto);
             
-            System.out.println("Código de Identificação: ");
-            int idProduto = sc.nextInt();
-            produto.setPedidoID(idProduto);
+            // System.out.println("Código de Identificação: ");
+            // int idProduto = sc.nextInt();
+            // produto.setPedidoID(idProduto);
             
-            System.out.println("Valor: ");
-            float valorProduto = sc.nextFloat();
-            produto.setValorTotalCalculado(valorProduto);
+            // System.out.println("Valor: ");
+            // float valorProduto = sc.nextFloat();
+            // produto.setValorTotalCalculado(valorProduto);
             
             System.out.println("Seu pedido de "+ nomeProduto +" foi confirmado.");
             System.out.println("Novo pedido[1]    Voltar[0]");
@@ -80,32 +86,67 @@ public class Loja{
         // sc.close();
     };
     // Tentar fezer sistema de emumeração da lista
-    public void buscarPedido(){
-        System.out.println("---------Lista---------");
-        for(Pedidos listaPedidos: listaPedidos)
-        System.out.println(listaPedidos);
-    };
+    public void listarPedido(){
+        System.out.printf("\n--------Lista de pedidos--------\n");
+        int i = 1;
+        for (Pedidos numlista: listaPedidos) {
+          System.out.printf("Pedido %d- %s\n", i, numlista);
+          i++;
+        }
+    }
+
+    public void buscarPedido(){}
     
     public void removerPedido(){
         // System.out.println("Seu pedido de "+ pedido +" foi removido.");
-        Scanner sc = new Scanner(System.in);
-        int n = 2;
+        int fazer = 1;
+        int n;
         
-        while(n != 0){
+        do{
+            int size = listaPedidos.size();
             System.out.println("");
             System.out.println("Remover Pedido");
-            Pedidos pedido = listaPedidos.get(sc.nextInt() - 1);
-            listaPedidos.remove(listaPedidos.indexOf(pedido));
-            buscarPedido();
+            n = sc.nextInt() - 1;
+            if (listaPedidos.isEmpty()){
+                System.out.println("Lista vazia!");
+                return;
+            } else if(n > size) {
+                System.out.println("Erro: Este pedido não está na lista.\n");
+            } else {
+                Pedidos pedido = listaPedidos.get(n);
+                listaPedidos.remove(listaPedidos.indexOf(pedido));
+                listarPedido();
+            }
             System.out.println("----Remover outro[1] -------- Voltar[0]----");
-            n = sc.nextInt();
-            
-            // Fazer logica caso a lista esteja vazia
-        }
-        // sc.close();
+            fazer = sc.nextInt();
+        } while (fazer == 1);
+        
+        // while(n != 0){
+        //     System.out.println("");
+        //     System.out.println("Remover Pedido");
+        //     Pedidos pedido = listaPedidos.get(sc.nextInt() - 1);
+        //     if (listaPedidos.isEmpty()){
+        //         System.out.println("Lista vazia!");
+        //         return;
+        //     } else if(n > listaPedidos.size()){
+        //        System.out.println("\n\nEste pedido não existe!");
+        //        listarPedido();
+        //         n = 2;
+        //     } else {
+        //         listaPedidos.remove(listaPedidos.indexOf(pedido));
+        //         listarPedido();
+        //         System.out.println("----Remover outro[1] -------- Voltar[0]----");
+        //         fazer = sc.nextInt();
+        //     }            
+        // }
     };
     
-    public void metodos(){};
+    public void metodos(){
+        listaPedidos.add(new Pedidos("nomeProduto"));
+        listaPedidos.add(new Pedidos("roger"));
+        listaPedidos.add(new Pedidos("rebeca"));
+        listaPedidos.add(new Pedidos("renata"));
+    };
     
     public static void main(String[] args) {
         Loja i = new Loja();
@@ -115,17 +156,17 @@ public class Loja{
         // // i.inserirPedido("Maça");
         // // i.inserirPedido("Clovis");
         
-        // i.buscarPedido();
+        // i.listarPedido();
         
         // i.inserirPedido();
         // // i.removerPedido("Clovis");
-        // i.buscarPedido();
+        // i.listarPedido();
         
-        // i.buscarPedido();
+        // i.listarPedido();
 
         // System.out.println(dono.getNome());
         // System.out.println(dono.getMatricula());
-
+        i.metodos();
         i.menu();
         
     }
