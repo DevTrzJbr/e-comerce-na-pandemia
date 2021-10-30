@@ -106,7 +106,7 @@ public class Loja{
                 System.out.println("Erro: Este pedido não está na lista.\n");
             } else {
                 // Pedidos pedido = listaPedidos.get(n);
-                System.out.println(listaPedidos.get(n));
+                System.out.println("Pedido: " + listaPedidos.get(n) + " - ID: " + listaPedidos.get(n).getPedidoID());
             }
             System.out.println("----Buscar outro[1] -------- Voltar[0]----");
             fazer = sc.nextInt();
@@ -142,6 +142,13 @@ public class Loja{
         listaPedidos.add(new Pedidos("rebeca"));
         listaPedidos.add(new Pedidos("renata"));
     };
+
+    public void metodosID(){
+        listaPedidos.add(new Pedidos(000));
+        listaPedidos.add(new Pedidos(001));
+        listaPedidos.add(new Pedidos(12));
+        listaPedidos.add(new Pedidos(123));
+    };
     
     public static void main(String[] args) {
         Loja i = new Loja();
@@ -161,7 +168,8 @@ public class Loja{
 
         // System.out.println(dono.getNome());
         // System.out.println(dono.getMatricula());
-        i.metodos();
+        // i.metodos();
+        i.metodosID();
         i.menu();
         
     }
