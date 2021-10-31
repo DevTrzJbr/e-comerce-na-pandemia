@@ -16,6 +16,12 @@ public class Pedidos {
         this.valorTotalCalculado = 0;        
     }
 
+    public Pedidos(String nome, int id) {
+        this.pedidoNome = nome;
+        this.pedidoID = id;
+        this.valorTotalCalculado = 0;        
+    }
+
     public Pedidos(int id) {
         this.pedidoNome = "nome";
         this.pedidoID = id;
