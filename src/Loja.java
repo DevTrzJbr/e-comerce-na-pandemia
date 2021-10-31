@@ -38,7 +38,8 @@ public class Loja{
                 break;
 
                 case 3:
-                buscarPedido();
+                // buscarPedido();
+                buscarPedidoID();
                 break;
                 
                 case 4:
@@ -112,7 +113,17 @@ public class Loja{
             fazer = sc.nextInt();
         } while(fazer == 1);
     }
-    
+
+    public Pedidos buscarPedidoID(){
+        int id = sc.nextInt();
+        for (Pedidos a : listaPedidos) {
+            if (a.getPedidoID() == id){
+                System.out.println(a);
+            };
+        }
+        return null;
+    }
+    // Criar um voltar caso digite sem querer removar pedido.
     public void removerPedido(){
         int fazer = 1;
         int n;
@@ -137,10 +148,10 @@ public class Loja{
     };
     
     public void metodos(){
-        listaPedidos.add(new Pedidos("nomeProduto"));
-        listaPedidos.add(new Pedidos("roger"));
-        listaPedidos.add(new Pedidos("rebeca"));
-        listaPedidos.add(new Pedidos("renata"));
+        listaPedidos.add(new Pedidos("nomeProduto", 1));
+        listaPedidos.add(new Pedidos("roger", 2));
+        listaPedidos.add(new Pedidos("rebeca", 398));
+        listaPedidos.add(new Pedidos("renata", 4));
     };
 
     public void metodosID(){
@@ -168,8 +179,8 @@ public class Loja{
 
         // System.out.println(dono.getNome());
         // System.out.println(dono.getMatricula());
-        // i.metodos();
-        i.metodosID();
+        i.metodos();
+        // i.metodosID();
         i.menu();
         
     }
