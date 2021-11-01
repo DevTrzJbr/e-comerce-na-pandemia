@@ -38,12 +38,12 @@ public class Loja{
                 break;
 
                 case 3:
-                // buscarPedido();
-                buscarPedidoID();
+                metodosBuscarPedido();
                 break;
                 
                 case 4:
-                removerPedido();
+                // removerPedido();
+                metodosRemoverPedido();
                 break;
                 
                 // case 4:
@@ -66,19 +66,21 @@ public class Loja{
             
             System.out.println("Nome: ");
             String nomeProduto = sc.next();
-            listaPedidos.add(new Pedidos(nomeProduto));
-            produto.setPedidoNome(nomeProduto);
+            // produto.setPedidoNome(nomeProduto);
             
-            // System.out.println("Código de Identificação: ");
-            // int idProduto = sc.nextInt();
+            System.out.println("Código de Identificação: ");
+            int idProduto = sc.nextInt();
             // produto.setPedidoID(idProduto);
             
-            // System.out.println("Valor: ");
-            // float valorProduto = sc.nextFloat();
+            System.out.println("Valor: ");
+            float valorProduto = sc.nextFloat();
             // produto.setValorTotalCalculado(valorProduto);
             
-            System.out.println("Seu pedido de "+ nomeProduto +" foi confirmado.");
-            System.out.println("Novo pedido[1]    Voltar[0]");
+            listaPedidos.add(new Pedidos(nomeProduto, idProduto, valorProduto));
+            
+            System.out.println("\nSeu pedido de ["+ nomeProduto +"] foi confirmado.");
+            System.out.printf("\nNome: %s\nID: %d\nPreço: %.2f\n", nomeProduto, idProduto, valorProduto);
+            System.out.println("\n----Novo pedido[1] ---- Voltar[0]----");
             n = sc.nextInt();
         }
         // sc.close();
@@ -88,7 +90,7 @@ public class Loja{
         System.out.printf("\n--------Lista de pedidos--------\n");
         int i = 1;
         for (Pedidos numlista: listaPedidos) {
-            System.out.printf("Pedido %d- %s\n", i, numlista);
+            System.out.printf("Ordem %d- %s ID: %d\n", i, numlista, numlista.getPedidoID());
             i++;
         }
     }
@@ -98,7 +100,7 @@ public class Loja{
         int n;
         
         do{
-            System.out.println("\nBuscar pedido");
+            System.out.println("\n--------Buscar pedido--------\n Ordem: ");
             n = sc.nextInt() - 1;
             if (listaPedidos.isEmpty()){
                 System.out.println("Lista vazia!");
@@ -109,27 +111,71 @@ public class Loja{
                 // Pedidos pedido = listaPedidos.get(n);
                 System.out.println("Pedido: " + listaPedidos.get(n) + " - ID: " + listaPedidos.get(n).getPedidoID());
             }
-            System.out.println("----Buscar outro[1] -------- Voltar[0]----");
+            System.out.println("\n----Buscar outro[1] -------- Voltar[0]----");
             fazer = sc.nextInt();
         } while(fazer == 1);
+        metodosBuscarPedido();
     }
 
     public Pedidos buscarPedidoID(){
+        System.out.println("\n--------Buscar Pedido--------\n ID:");
         int id = sc.nextInt();
-        for (Pedidos a : listaPedidos) {
+        boolean pedido = false;
+
+        for (Pedidos a : listaPedidos) 
+        {
             if (a.getPedidoID() == id){
-                System.out.println(a);
+                pedido = true;
+                System.out.println("\nPedido: [" + a + "]");
+                break;
             };
         }
+        // System.out.println(pedido);
+
+        if (listaPedidos.isEmpty())
+        {
+            System.out.println("Lista vazia!");
+        } 
+        else if(pedido == false) 
+        {
+            System.out.println("Erro: Este pedido não está na lista.\n");
+        } 
+        metodosBuscarPedido();
         return null;
     }
+
+    public void metodosBuscarPedido(){
+        System.out.println("");
+        System.out.println("- Buscar pela Ordem da lista [1]\n- Buscar pelo ID [2]\n- Menu [0]");
+        int escolha = sc.nextInt();
+
+
+        switch(escolha){
+
+            case 0:
+            return;
+            
+            case 1:
+            buscarPedido();
+            break;
+
+            case 2:
+            buscarPedidoID();
+            break;
+
+            default:
+            System.out.println("\nErro: Tente novamente.\n");
+            metodosBuscarPedido();
+        }
+    }
+
     // Criar um voltar caso digite sem querer removar pedido.
     public void removerPedido(){
         int fazer = 1;
         int n;
         
         do{
-            System.out.println("\nRemover Pedido");
+            System.out.println("\n--------Remover Pedido--------\n Ordem:");
             n = sc.nextInt() - 1;
             if (listaPedidos.isEmpty()){
                 System.out.println("Lista vazia!");
@@ -139,13 +185,74 @@ public class Loja{
             } else {
                 Pedidos pedido = listaPedidos.get(n);
                 listaPedidos.remove(listaPedidos.indexOf(pedido));
-                listarPedido();
                 System.out.println("\nSeu pedido ["+ pedido +"] foi removido.\n");
+                listarPedido();
             }
-            System.out.println("----Remover outro[1] -------- Voltar[0]----");
+            System.out.println("\n----Remover outro[1] -------- Voltar[0]----");
             fazer = sc.nextInt();
         } while(fazer == 1);
+        metodosRemoverPedido();
     };
+
+    public Pedidos removerPedidoID(){
+        int fazer = 1;
+
+        do{
+            System.out.println("\n--------Remover Pedido--------\n ID:");
+            int id = sc.nextInt();
+            boolean pedido = false;
+    
+            for (Pedidos a : listaPedidos) 
+            {
+                if (a.getPedidoID() == id){
+                    pedido = true;
+                    listaPedidos.remove(a);
+                    System.out.println("Pedido: [" + a + "] removido com sucesso!");
+                    listarPedido();
+                    break; // kit kat
+                };
+            }    
+
+            if (listaPedidos.isEmpty())
+            {
+                System.out.println("Lista vazia!");
+            } 
+            else if(pedido == false) 
+            {
+                System.out.println("Erro: Este pedido não está na lista.\n");
+            }
+
+            System.out.println("\n----Remover outro[1] -------- Voltar[0]----");
+            fazer = sc.nextInt();
+        }while(fazer == 1);
+        metodosRemoverPedido();
+        return null;
+    }
+
+    public void metodosRemoverPedido(){
+        System.out.println("");
+        System.out.println("- Remover pela Ordem da lista [1]\n- Remover pelo ID [2]\n- Menu [0]");
+        int escolha = sc.nextInt();
+
+
+        switch(escolha){
+
+            case 0:
+            return;
+            
+            case 1:
+            removerPedido();
+            break;
+
+            case 2:
+            removerPedidoID();
+            break;
+
+            default:
+            System.out.println("\nErro: Tente novamente.\n");
+            metodosRemoverPedido();
+        }
+    }
     
     public void metodos(){
         listaPedidos.add(new Pedidos("nomeProduto", 1));

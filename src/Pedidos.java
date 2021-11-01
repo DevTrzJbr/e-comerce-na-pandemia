@@ -12,14 +12,18 @@ public class Pedidos {
 
     public Pedidos(String nome) {
         this.pedidoNome = nome;
-        this.pedidoID = 0;
-        this.valorTotalCalculado = 0;        
     }
 
     public Pedidos(String nome, int id) {
         this.pedidoNome = nome;
         this.pedidoID = id;
         this.valorTotalCalculado = 0;        
+    }
+
+    public Pedidos(String nome, int id, float valor) {
+        this.pedidoNome = nome;
+        this.pedidoID = id;
+        this.valorTotalCalculado = valor;        
     }
 
     public Pedidos(int id) {
