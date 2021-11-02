@@ -1,4 +1,6 @@
-import java.sql.Date;
+package questao3;
+
+import java.util.Date;
 
 public class Pedidos {
     private String pedidoNome;
@@ -17,13 +19,15 @@ public class Pedidos {
     public Pedidos(String nome, int id) {
         this.pedidoNome = nome;
         this.pedidoID = id;
-        this.valorTotalCalculado = 0;        
+        this.valorTotalCalculado = 0;
+        gerarDataEmissao();        
     }
 
     public Pedidos(String nome, int id, float valor) {
         this.pedidoNome = nome;
         this.pedidoID = id;
-        this.valorTotalCalculado = valor;        
+        this.valorTotalCalculado = valor;     
+        gerarDataEmissao();
     }
 
     public Pedidos(int id) {
@@ -49,10 +53,12 @@ public class Pedidos {
     }
 
     public Date getDataEmissao() {
+        
         return this.dataEmissao;
     }
 
-    public void setDataEmissao(Date dataEmissao) {
+    public void gerarDataEmissao() {
+        dataEmissao = new Date();
         this.dataEmissao = dataEmissao;
     }
 
