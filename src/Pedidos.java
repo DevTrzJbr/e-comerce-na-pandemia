@@ -1,5 +1,3 @@
-package questao3;
-
 import java.util.Date;
 
 public class Pedidos {
