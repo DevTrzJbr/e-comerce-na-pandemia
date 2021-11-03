@@ -7,7 +7,6 @@ public class Loja{
     private List <Pedidos> listaPedidos = new ArrayList<>();
     
     public Funcionario dono = new Funcionario("Vinicius", 1000); // Melhorar sistema de funcionários (Perguntar ao professor)
-    Pedidos pedido;
     
     public void menu(){
         boolean rodando = true;
