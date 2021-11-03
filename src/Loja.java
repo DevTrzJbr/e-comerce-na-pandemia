@@ -65,7 +65,7 @@ public class Loja{
             System.out.println("Preencha os dados do pedido: ");
             
             System.out.println("Nome: ");
-            String nomeProduto = sc.next();
+            String nomeProduto = sc.nextLine();
             // produto.setPedidoNome(nomeProduto);
             
             System.out.println("Código de Identificação: ");
@@ -90,7 +90,7 @@ public class Loja{
         System.out.printf("\n--------Lista de pedidos--------\n");
         int i = 1;
         for (Pedidos numlista: listaPedidos) {
-            System.out.printf("Ordem %d: %s | ID: <%d> | Conta: R$ %.2f | Data Emissão: "+ numlista.getDataEmissao() +"\n", i, numlista, numlista.getPedidoID(), numlista.getValorTotalCalculado());
+            System.out.printf("Ordem %d: %s - ID: [%d] \n", i, numlista, numlista.getPedidoID());
             i++;
         }
     }
@@ -285,7 +285,7 @@ public class Loja{
     public static void main(String[] args) {
         Loja i = new Loja();
         
-        i.login();
+        // i.login();
         i.metodos();
         i.menu();
         
