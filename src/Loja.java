@@ -6,8 +6,7 @@ public class Loja{
     Scanner sc = new Scanner(System.in);
     private List <Pedidos> listaPedidos = new ArrayList<>();
     
-    public Funcionario dono = new Funcionario("Vinicius", 123); // Melhorar sistema de funcionários (Perguntar ao professor)
-    public Pedidos produto = new Pedidos();
+    public Funcionario dono = new Funcionario("Vinicius", 1000); // Melhorar sistema de funcionários (Perguntar ao professor)
     
     public void menu(){
         boolean rodando = true;
@@ -22,7 +21,7 @@ public class Loja{
             switch(opcao)
             {
                 case 0:
-                System.out.println("\nObrigado pela preferencia. Volte sempre!");
+                System.out.println("\nSr. Vinícius, tenha um bom dia.");
                 System.out.println("Saindo...");
                 rodando = false;
                 break;
@@ -51,11 +50,11 @@ public class Loja{
                 // break;
                 
                 default:
-                System.out.println("Opção inesistente.");
+                System.out.println("Opção inexistente.");
             }
         }
         sc.close();
-    };
+    }
     
     public void inserirPedido(){
         // Consertar fechamento dos scanners (Perguntar ao professor)
@@ -65,7 +64,7 @@ public class Loja{
             System.out.println("Preencha os dados do pedido: ");
             
             System.out.println("Nome: ");
-            String nomeProduto = sc.next();
+            String nomeProduto = sc.nextLine();
             // produto.setPedidoNome(nomeProduto);
             
             System.out.println("Código de Identificação: ");
@@ -76,10 +75,10 @@ public class Loja{
             float valorProduto = sc.nextFloat();
             // produto.setValorTotalCalculado(valorProduto);
             
-            listaPedidos.add(new Pedidos(nomeProduto, idProduto, valorProduto));
+            listaPedidos.add(new Pedidos(nomeProduto, idProduto, valorProduto)); // relacionamento de composição
             
             System.out.println("\nSeu pedido de ["+ nomeProduto +"] foi confirmado.");
-            System.out.printf("\nNome: %s\nID: %d\nPreço: %.2f\n", nomeProduto, idProduto, valorProduto);
+            System.out.printf("\nNome: %s\nID: %d\nConta: %.2f\n", nomeProduto, idProduto, valorProduto);
             System.out.println("\n----Novo pedido[1] ---- Voltar[0]----");
             n = sc.nextInt();
         }
@@ -90,13 +89,13 @@ public class Loja{
         System.out.printf("\n--------Lista de pedidos--------\n");
         int i = 1;
         for (Pedidos numlista: listaPedidos) {
-            System.out.printf("Ordem %d- %s ID: %d\n", i, numlista, numlista.getPedidoID());
+            System.out.printf("Ordem %d: %s - ID: [%d] \n", i, numlista, numlista.getPedidoID());
             i++;
         }
     }
     
     public void buscarPedido(){
-        int fazer = 1;
+        int condicao = 1;
         int n;
         
         do{
@@ -109,11 +108,11 @@ public class Loja{
                 System.out.println("Erro: Este pedido não está na lista.\n");
             } else {
                 // Pedidos pedido = listaPedidos.get(n);
-                System.out.println("Pedido: " + listaPedidos.get(n) + " - ID: " + listaPedidos.get(n).getPedidoID());
+                System.out.println("Pedido: " + listaPedidos.get(n) + " | ID: " + listaPedidos.get(n).getPedidoID()+" | Conta: "+ listaPedidos.get(n).getValorTotalCalculado()+ " | Data emissão: "+ listaPedidos.get(n).getDataEmissao());
             }
             System.out.println("\n----Buscar outro[1] -------- Voltar[0]----");
-            fazer = sc.nextInt();
-        } while(fazer == 1);
+            condicao = sc.nextInt();
+        } while(condicao == 1);
         metodosBuscarPedido();
     }
 
@@ -128,7 +127,7 @@ public class Loja{
                 pedido = true;
                 System.out.println("\nPedido: [" + a + "]");
                 break;
-            };
+            }
         }
         // System.out.println(pedido);
 
@@ -192,16 +191,16 @@ public class Loja{
             fazer = sc.nextInt();
         } while(fazer == 1);
         metodosRemoverPedido();
-    };
+    }
 
     public Pedidos removerPedidoID(){
         int fazer = 1;
-
+        boolean pedido = false;
+        
         do{
             System.out.println("\n--------Remover Pedido--------\n ID:");
             int id = sc.nextInt();
-            boolean pedido = false;
-    
+            
             for (Pedidos a : listaPedidos) 
             {
                 if (a.getPedidoID() == id){
@@ -210,7 +209,7 @@ public class Loja{
                     System.out.println("Pedido: [" + a + "] removido com sucesso!");
                     listarPedido();
                     break; // kit kat
-                };
+                }
             }    
 
             if (listaPedidos.isEmpty())
@@ -225,12 +224,12 @@ public class Loja{
             System.out.println("\n----Remover outro[1] -------- Voltar[0]----");
             fazer = sc.nextInt();
         }while(fazer == 1);
+        
         metodosRemoverPedido();
         return null;
     }
 
     public void metodosRemoverPedido(){
-        System.out.println("");
         System.out.println("- Remover pela Ordem da lista [1]\n- Remover pelo ID [2]\n- Menu [0]");
         int escolha = sc.nextInt();
 
@@ -249,45 +248,44 @@ public class Loja{
             break;
 
             default:
-            System.out.println("\nErro: Tente novamente.\n");
+            System.out.println("\nErro: Comando não identificado. Tente novamente.\n");
             metodosRemoverPedido();
         }
     }
     
-    public void metodos(){
-        listaPedidos.add(new Pedidos("nomeProduto", 1));
-        listaPedidos.add(new Pedidos("roger", 2));
-        listaPedidos.add(new Pedidos("rebeca", 398));
-        listaPedidos.add(new Pedidos("renata", 4));
-    };
-
-    public void metodosID(){
-        listaPedidos.add(new Pedidos(000));
-        listaPedidos.add(new Pedidos(001));
-        listaPedidos.add(new Pedidos(12));
-        listaPedidos.add(new Pedidos(123));
-    };
+    private void metodos(){
+        listaPedidos.add(new Pedidos("Andre M", 101));
+        listaPedidos.add(new Pedidos("Andre P", 102));
+        listaPedidos.add(new Pedidos("João T", 103));
+        listaPedidos.add(new Pedidos("Pedro", 104));
+    }
+    
+    private void login(){
+        boolean acesso = false;
+        String nome;
+        int ID;
+        System.out.println("======= LOJA: ACCESS IDENTIFICATION =======");
+        System.out.println("Bem-vindo. Confirme sua identificação para acessar o sistema da loja.");
+        do{
+            System.out.println("Nome: ");
+            nome = sc.next();
+            System.out.println("ID: ");
+            ID = sc.nextInt();
+            
+            if ("Vinicius".equals(nome) && ID == 1000) 
+                acesso = true;
+            else 
+                System.out.println("Ops, houve um erro na identificação de acesso. Tente novamente.");
+        } while (acesso == false);
+        
+        System.out.println("Olá, Sr. Vinícius.");
+    }
     
     public static void main(String[] args) {
         Loja i = new Loja();
         
-
-        // i.inserirPedido();
-        // // i.inserirPedido("Maça");
-        // // i.inserirPedido("Clovis");
-        
-        // i.listarPedido();
-        
-        // i.inserirPedido();
-        // // i.removerPedido("Clovis");
-        // i.listarPedido();
-        
-        // i.listarPedido();
-
-        // System.out.println(dono.getNome());
-        // System.out.println(dono.getMatricula());
+        // i.login();
         i.metodos();
-        // i.metodosID();
         i.menu();
         
     }

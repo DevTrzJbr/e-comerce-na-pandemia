@@ -1,9 +1,10 @@
-import java.sql.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Pedidos {
     private String pedidoNome;
     private int pedidoID;
-    private Date dataEmissao;
+    private String dataEmissao;
     private float valorTotalCalculado;
 
 
@@ -17,13 +18,15 @@ public class Pedidos {
     public Pedidos(String nome, int id) {
         this.pedidoNome = nome;
         this.pedidoID = id;
-        this.valorTotalCalculado = 0;        
+        this.valorTotalCalculado = 0;
+        gerarDataEmissao();        
     }
 
     public Pedidos(String nome, int id, float valor) {
         this.pedidoNome = nome;
         this.pedidoID = id;
-        this.valorTotalCalculado = valor;        
+        this.valorTotalCalculado = valor;     
+        gerarDataEmissao();
     }
 
     public Pedidos(int id) {
@@ -48,12 +51,14 @@ public class Pedidos {
         this.pedidoID = pedidoID;
     }
 
-    public Date getDataEmissao() {
+    public String getDataEmissao() {
+        
         return this.dataEmissao;
     }
 
-    public void setDataEmissao(Date dataEmissao) {
-        this.dataEmissao = dataEmissao;
+    public void gerarDataEmissao() {
+        LocalDateTime myDateObj = LocalDateTime.now();
+        this.dataEmissao = myDateObj.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
     }
 
     public float getValorTotalCalculado() {
